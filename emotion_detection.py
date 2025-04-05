@@ -1,5 +1,4 @@
 import requests
-import json
 
 def emotion_detector(text_to_analyse):
     # URL of the emotion detection service
@@ -10,7 +9,5 @@ def emotion_detector(text_to_analyse):
     header = {"grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"}
     # Sending a POST request to the emotion detection API
     response = requests.post(url, json=myobj, headers=header)
-    # Parsing the JSON response from the API
-    formatted_response = json.loads(response.text)
     # Return the response text from the API
     return response.text
