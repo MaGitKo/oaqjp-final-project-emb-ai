@@ -10,6 +10,16 @@ def emotion_detector(text_to_analyse):
     header = {"grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"}
     # Sending a POST request to the emotion detection API
     response = requests.post(url, json=myobj, headers=header)
+    # Handle blank input or bad request (HTTP 400)
+    if response.status_code == 400:
+        return {
+            'anger': None,
+            'disgust': None,
+            'fear': None,
+            'joy': None,
+            'sadness': None,
+            'dominant_emotion': None
+        }
     # Parsing the JSON response from the API
     formatted_response = json.loads(response.text)
     # Access the first item in the emotionPredictions list
